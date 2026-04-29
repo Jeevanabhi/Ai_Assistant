@@ -2,6 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -11,6 +16,9 @@ const port = process.env.PORT || 3001;
 // Allow requests from any origin during local development to avoid port issues
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the Vite build directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Initialize the Google Gen AI SDK
 // The user currently has VITE_GEMINI_API_KEY in their .env, so we fall back to it
@@ -72,6 +80,11 @@ CRITICAL RULE: If you are not absolutely sure about the answer, or if the questi
       status: statusCode
     });
   }
+});
+
+// Catch-all route to serve the React app for non-API requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(port, () => {

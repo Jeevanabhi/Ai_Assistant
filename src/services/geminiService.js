@@ -27,6 +27,8 @@ export const generateAIResponse = async (userText, messageHistory, userContext =
         errorMessage = "The AI model is currently experiencing high demand (503 Service Unavailable). Please wait a moment and try again.";
     } else if (error.message.includes("429")) {
         errorMessage = "The API Key has exceeded its usage quota (429 Resource Exhausted). Please check your Google AI Studio billing/plan.";
+    } else if (error.message.includes("403")) {
+        errorMessage = "Your API Key has been disabled because it was leaked publicly (403 Permission Denied). Please generate a new key in Google AI Studio and update your .env file.";
     } else if (error.message.includes("404")) {
         errorMessage = "The AI model specified was not found (404).";
     }
