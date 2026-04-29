@@ -11,7 +11,7 @@ function App() {
     {
       id: 1,
       role: 'ai',
-      content: 'Hello! I am your official Voting Information Assistant for India. I can help you with registration, finding polling booths, and other details from the Election Commission of India (voters.eci.gov.in). How can I help you today?'
+      content: 'Hello! I am your Voting Information Assistant for India. I can help you with registration, finding polling booths, and other details from the Election Commission of India (voters.eci.gov.in). How can I help you today?'
     }
   ]);
   const [input, setInput] = useState('');

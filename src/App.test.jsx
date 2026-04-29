@@ -18,7 +18,7 @@ describe('Voting Assistant App', () => {
 
   it('renders the initial AI greeting', () => {
     render(<App />);
-    expect(screen.getByText(/Hello! I am your official Voting Information Assistant/i)).toBeInTheDocument();
+    expect(screen.getByText(/Hello! I am your Voting Information Assistant/i)).toBeInTheDocument();
   });
 
   it('allows user to type in the input field', () => {
