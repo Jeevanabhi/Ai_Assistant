@@ -10,13 +10,27 @@ const BotIcon = () => (
   </svg>
 );
 
-const ChatHeader = React.memo(() => {
+const ChatHeader = React.memo(({ userContext, setUserContext }) => {
   return (
     <header className="app-header">
       <BotIcon />
-      <div>
+      <div className="header-info">
         <h1 id="chat-title">Voting Assistant</h1>
         <p>Official Information sourced from voters.eci.gov.in</p>
+      </div>
+      <div className="context-selector">
+        <label htmlFor="context-select" className="sr-only">Select Voter Profile</label>
+        <select 
+          id="context-select" 
+          value={userContext} 
+          onChange={(e) => setUserContext(e.target.value)}
+          aria-label="Voter Profile"
+        >
+          <option value="General Voter">General Voter</option>
+          <option value="First-Time Voter (18+)">First-Time Voter (18+)</option>
+          <option value="NRI (Overseas) Voter">NRI (Overseas) Voter</option>
+          <option value="Senior Citizen or PwD">Senior Citizen or PwD</option>
+        </select>
       </div>
     </header>
   );

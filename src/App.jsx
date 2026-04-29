@@ -6,6 +6,7 @@ import { generateAIResponse } from './services/geminiService';
 import './index.css';
 
 function App() {
+  const [userContext, setUserContext] = useState('General Voter');
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -27,16 +28,16 @@ function App() {
     setInput('');
     setIsLoading(true);
 
-    const aiResponse = await generateAIResponse(userMsg.content, currentMessages);
+    const aiResponse = await generateAIResponse(userMsg.content, currentMessages, userContext);
     
     const aiMsg = { id: Date.now() + 1, role: 'ai', content: aiResponse.text };
     setMessages(prev => [...prev, aiMsg]);
     setIsLoading(false);
-  }, [input, isLoading, messages]);
+  }, [input, isLoading, messages, userContext]);
 
   return (
     <div className="app-container">
-      <ChatHeader />
+      <ChatHeader userContext={userContext} setUserContext={setUserContext} />
       <MessageList messages={messages} isLoading={isLoading} />
       <ChatInput 
         input={input} 

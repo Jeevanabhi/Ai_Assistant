@@ -2,16 +2,18 @@ import { GoogleGenAI } from '@google/genai';
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
-const systemInstruction = `
+export const generateAIResponse = async (userText, messageHistory, userContext = 'General Voter') => {
+  const dynamicSystemInstruction = `
 You are an official Voting Information Assistant for the Election Commission of India (ECI).
 Your ONLY source of truth is the information available on https://voters.eci.gov.in/ and official Indian election processes.
 You must help users understand the election process, timelines, and steps in an interactive, easy-to-follow, and step-by-step way. Use formatting like bullet points and bold text to make complex processes simple to digest.
-You must also help users with voter registration, finding polling booths, tracking application status, downloading e-EPIC, and other related services.
+
+IMPORTANT CONTEXT: The user you are currently speaking to has identified their profile as: "${userContext}".
+You must tailor your advice, forms, and timelines specifically for this profile. For example, if they are an NRI, focus on Form 6A and overseas rules. If they are Senior Citizens/PwD, focus on accessibility and at-home voting if applicable.
 
 CRITICAL RULE: If you are not absolutely sure about the answer, or if the question is unrelated to Indian voting processes or the ECI, your answer MUST be: "I don't know. Please check the official Election Commission of India website at https://voters.eci.gov.in/ for the most accurate information." Do not guess or provide general knowledge outside this scope.
-`.trim();
+  `.trim();
 
-export const generateAIResponse = async (userText, messageHistory) => {
   try {
     const historyForApi = messageHistory
       .filter(msg => msg.id !== 1)
@@ -23,10 +25,10 @@ export const generateAIResponse = async (userText, messageHistory) => {
     const contents = [...historyForApi, { role: 'user', parts: [{ text: userText }] }];
 
     const response = await ai.models.generateContent({
-      model: 'gemini-flash-latest',
+      model: 'gemini-flash-lite-latest',
       contents: contents,
       config: {
-        systemInstruction: systemInstruction,
+        systemInstruction: dynamicSystemInstruction,
         temperature: 0.1,
       }
     });
