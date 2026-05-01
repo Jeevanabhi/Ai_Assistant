@@ -83,7 +83,7 @@ CRITICAL RULE: If you are not absolutely sure about the answer, or if the questi
 });
 
 // Catch-all route to serve the React app for non-API requests
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
