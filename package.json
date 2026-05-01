@@ -1,7 +1,10 @@
 {
   "name": "ai-assistant",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "An interactive AI voting assistant designed to help Indian citizens navigate the election process.",
+  "author": "Antigravity",
+  "keywords": ["react", "vite", "gemini", "ai", "voting", "eci"],
   "type": "module",
   "scripts": {
     "start": "node server.js",

@@ -276,7 +276,79 @@ body {
 /* Markdown Styles inside AI Message */
 .message.ai p { margin-bottom: 0.75rem; }
 .message.ai p:last-child { margin-bottom: 0; }
-.message.ai a { color: #60a5fa; text-decoration: none; }
-.message.ai a:hover { text-decoration: underline; }
+.message.ai a { color: #60a5fa; text-decoration: underline; text-underline-offset: 2px; }
+.message.ai a:hover { text-decoration: underline; color: #93c5fd; }
 .message.ai ul, .message.ai ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.message.ai li { margin-bottom: 0.25rem; }
 .message.ai strong { color: #fff; }
+.message.ai code { background: rgba(255, 255, 255, 0.1); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+
+/* Skip to Content Link (Accessibility) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--accent-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #root {
+    padding: 0;
+  }
+
+  .app-container {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .app-header {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .app-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .chat-area {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .message {
+    max-width: 90%;
+    font-size: 0.9rem;
+  }
+
+  .input-area {
+    padding: 1rem;
+  }
+
+  .context-selector select {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

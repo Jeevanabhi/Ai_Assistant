@@ -27,6 +27,7 @@ const ChatInput = React.memo(({ input, setInput, onSubmit, isLoading }) => {
     <form className="input-area" onSubmit={onSubmit} aria-label="Chat input form">
       <div className="input-wrapper">
         <input
+          id="chat-input"
           type="text"
           value={input}
           onChange={handleChange}

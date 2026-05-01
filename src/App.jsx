@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import ChatHeader from './components/ChatHeader';
 import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
@@ -36,16 +36,19 @@ function App() {
   }, [input, isLoading, messages, userContext]);
 
   return (
-    <div className="app-container">
-      <ChatHeader userContext={userContext} setUserContext={setUserContext} />
-      <MessageList messages={messages} isLoading={isLoading} />
-      <ChatInput 
-        input={input} 
-        setInput={setInput} 
-        onSubmit={handleSubmit} 
-        isLoading={isLoading} 
-      />
-    </div>
+    <>
+      <a href="#chat-input" className="skip-link">Skip to chat input</a>
+      <div className="app-container" role="application" aria-labelledby="chat-title">
+        <ChatHeader userContext={userContext} setUserContext={setUserContext} />
+        <MessageList messages={messages} isLoading={isLoading} />
+        <ChatInput 
+          input={input} 
+          setInput={setInput} 
+          onSubmit={handleSubmit} 
+          isLoading={isLoading} 
+        />
+      </div>
+    </>
   );
 }
 
