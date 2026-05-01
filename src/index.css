@@ -18,6 +18,11 @@
   padding: 0;
 }
 
+*:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 body {
   font-family: 'Inter', 'Roboto', sans-serif;
   background: var(--bg-gradient);

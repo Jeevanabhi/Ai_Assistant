@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import DOMPurify from 'dompurify';
+import { marked } from 'marked';
+import PropTypes from 'prop-types';
 
+/**
+ * Safely parses markdown to sanitized HTML.
+ * @param {string} text - The raw markdown text.
+ * @returns {string} Sanitized HTML string.
+ */
 const formatMarkdown = (text) => {
   if (!text) return '';
-  let html = text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    .replace(/\n/g, '<br />');
+  const html = marked.parse(text);
   
   // Securely sanitize the HTML
   return DOMPurify.sanitize(html);
@@ -53,4 +56,16 @@ const MessageList = React.memo(({ messages, isLoading }) => {
 });
 
 MessageList.displayName = 'MessageList';
+
+MessageList.propTypes = {
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      role: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
+
 export default MessageList;

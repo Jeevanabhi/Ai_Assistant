@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const BotIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <title>AI Assistant Bot Icon</title>
     <rect x="3" y="11" width="18" height="10" rx="2"></rect>
     <circle cx="12" cy="5" r="2"></circle>
     <path d="M12 7v4"></path>
@@ -9,6 +11,13 @@ const BotIcon = () => (
     <line x1="16" y1="16" x2="16" y2="16"></line>
   </svg>
 );
+
+/**
+ * ChatHeader component that displays the title and voter profile selector.
+ * @param {Object} props - The component props.
+ * @param {string} props.userContext - The currently selected voter profile.
+ * @param {function} props.setUserContext - Function to update the voter profile.
+ */
 
 const ChatHeader = React.memo(({ userContext, setUserContext }) => {
   return (
@@ -37,4 +46,10 @@ const ChatHeader = React.memo(({ userContext, setUserContext }) => {
 });
 
 ChatHeader.displayName = 'ChatHeader';
+
+ChatHeader.propTypes = {
+  userContext: PropTypes.string.isRequired,
+  setUserContext: PropTypes.func.isRequired,
+};
+
 export default ChatHeader;

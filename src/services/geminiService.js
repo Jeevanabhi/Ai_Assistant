@@ -1,3 +1,10 @@
+/**
+ * Generates an AI response from the Gemini API backend.
+ * @param {string} userText - The current message from the user.
+ * @param {Array<Object>} messageHistory - The chat history.
+ * @param {string} userContext - The selected voter profile context.
+ * @returns {Promise<{text: string, error: Error|null}>} An object containing the text response or error.
+ */
 export const generateAIResponse = async (userText, messageHistory, userContext = 'General Voter') => {
   try {
     const baseUrl = import.meta.env.DEV ? 'http://localhost:3001' : '';
