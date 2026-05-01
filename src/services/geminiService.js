@@ -1,6 +1,7 @@
 export const generateAIResponse = async (userText, messageHistory, userContext = 'General Voter') => {
   try {
-    const response = await fetch('http://localhost:3001/api/chat', {
+    const baseUrl = import.meta.env.DEV ? 'http://localhost:3001' : '';
+    const response = await fetch(`${baseUrl}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
